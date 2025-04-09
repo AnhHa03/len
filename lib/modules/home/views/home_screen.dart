@@ -1,11 +1,11 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:len/core/values/app_colors.dart';
 import 'package:len/core/values/image_assets.dart';
 import 'package:len/modules/idioms/view/idioms_screen.dart';
+import 'package:len/modules/irregular_verbs/view/irregular_verbs_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -296,7 +296,7 @@ class HomeScreen extends StatelessWidget {
                     })),
                     Expanded(
                         child: sourceItem("Động từ \nbất quy tắc", ImageAssets.icIrrVerb, () {
-                      // Get.to(() => IrregularVerbsScreen(),);
+                       Get.to(() => IrregulerVerbsScreen());
                     })),
                     // Expanded(
                     //     child: sourceItem("Ngữ pháp", ImageAssets.icGrammar,
