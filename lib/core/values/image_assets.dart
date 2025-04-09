@@ -16,4 +16,5 @@ abstract class ImageAssets {
   static const icClose = 'assets/images/svg/ic_close.svg';
   static const icMic = 'assets/images/svg/ic_mic.svg';
   static const icMicFill = 'assets/images/svg/ic_mic_fill.svg';
+  static const icBack = 'assets/images/svg/ic_back.svg';
 }
