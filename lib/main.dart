@@ -3,7 +3,7 @@ import 'package:get/get_core/src/smart_management.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:len/core/values/app_colors.dart';
 import 'package:len/modules/root_view/view/root_view_screen.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return ScreenUtilInit(
+      //designSize: AppConstant.designSize,
+      builder: (context, child) => GetMaterialApp(
       smartManagement: SmartManagement.full,
       showPerformanceOverlay: false,
       title: 'Flutter Demo',
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: RootViewScreen(),
+      ),
     );
   }
 }

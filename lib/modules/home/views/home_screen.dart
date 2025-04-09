@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:len/core/values/app_colors.dart';
 import 'package:len/core/values/image_assets.dart';
+import 'package:len/modules/idioms/view/idioms_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -291,7 +292,7 @@ class HomeScreen extends StatelessWidget {
                     })),
                     Expanded(
                         child: sourceItem("Thành ngữ\n Tiếng Anh", ImageAssets.icIdiom, () {
-                      //Get.to(() => IdiomsScreen());
+                        Get.to(() => IdiomsScreen());
                     })),
                     Expanded(
                         child: sourceItem("Động từ \nbất quy tắc", ImageAssets.icIrrVerb, () {
