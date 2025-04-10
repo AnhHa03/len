@@ -108,8 +108,6 @@ class ItemIrregularVerbs extends StatelessWidget {
           
         ],
     ),
-      
   );
-    
   }
 }

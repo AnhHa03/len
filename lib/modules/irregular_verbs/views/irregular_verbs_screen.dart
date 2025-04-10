@@ -6,44 +6,31 @@ import 'package:len/core/values/image_assets.dart';
 import 'package:len/modules/irregular_verbs/controller/irregular_verbs_controller.dart';
 import 'package:len/modules/irregular_verbs/widgets/item_irrelugar_verbs.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class IrregulerVerbsScreen extends StatelessWidget {
-  const IrregulerVerbsScreen({super.key});
+class IrregularVerbsScreen extends StatelessWidget {
+  const IrregularVerbsScreen({super.key});
     
   
   @override
   Widget build(BuildContext context){
-    final deviceWidth = MediaQuery.of(context).size.width;
-    final deviceHeight = MediaQuery.of(context).size.height;
     final IrregularVerbScreenController controller = Get.put(IrregularVerbScreenController());
     
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xFFFFFFFF),
         appBar: _buildAppBar(context),
-        body: _buildBody(deviceHeight, deviceWidth, controller),
+        body: _buildBody( controller),
       ),
     );
   }
 
   Container _buildBody(
-    double deviceHeight,
-    double deviceWidth,
     IrregularVerbScreenController controller
-    //
   ) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: deviceWidth * 0.05,
-        vertical: deviceHeight *0.02,
-      ),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.white, AppColors.gray60],
-        ),
-      ),
+      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h),
       child: Column(
         children: [
           TextField (
@@ -57,17 +44,21 @@ class IrregulerVerbsScreen extends StatelessWidget {
               isCollapsed: true,
               filled: true,
               fillColor: Colors.white,
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColors.gray40),              
-              ),            
+                borderSide: const BorderSide(color: AppColors.primary40), 
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.primary40),              
+              ),               
               prefixIcon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: SvgPicture.asset(ImageAssets.icSearch),
               ),
               hintText: "Tìm kiếm",
               hintStyle: const TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: AppColors.gray20,
                   fontSize: 16.0),
               contentPadding: const EdgeInsets.symmetric(vertical: 12),            
@@ -184,25 +175,31 @@ class IrregulerVerbsScreen extends StatelessWidget {
             height: 12,
           ),
 
-          Expanded(child: Obx(()=> SingleChildScrollView(      
-            child: SizedBox(
-              height: deviceHeight * 0.7,
-              child: ListView.builder(
-                padding: EdgeInsets.only(top: 10),
+          Expanded(
+            child:Obx(() => 
+              SingleChildScrollView(    
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                itemCount: controller.searched_list.length,
-                itemBuilder: (context, index) {
-                  IrregularVerb verb = controller.searched_list[index];
-                  return ItemIrregularVerbs(
-                    infinitive: verb.infinitive,
-                    pastSimple: verb.pastSimple,
-                    pastParticiple: verb.pastParticiple,
-                    meaning: verb.meaning,
-                  );
-                },
-              ),
-            ),  
-          )),
+                child: Container(
+                  constraints: BoxConstraints(minHeight: Get.height),
+                  child: ListView.builder(
+                    padding: EdgeInsets.only(bottom: 2.h),
+                    itemCount: controller.searched_list.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      IrregularVerb verb = controller.searched_list[index];
+                      return ItemIrregularVerbs(
+                        infinitive: verb.infinitive,
+                        pastSimple: verb.pastSimple,
+                        pastParticiple: verb.pastParticiple,
+                        meaning: verb.meaning,
+                      );
+                    },
+                  ),
+                ),
+              ), 
+            )
           ),
         ],
       ),
@@ -224,11 +221,12 @@ class IrregulerVerbsScreen extends StatelessWidget {
       title: const Text (
         'Động từ bất quy tắc',
         style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
         ),
       ),
 
+      backgroundColor: const Color(0xFFFFFFFF),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(3.0), 
         child: Container(
